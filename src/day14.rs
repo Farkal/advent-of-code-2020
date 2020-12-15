@@ -30,7 +30,7 @@ fn input_generator(input: &str) -> Vec<Instruction> {
 
 fn apply_mask(mask: &str, value: &str) -> u64 {
     let mut res = 0;
-    let mut mult : u32 = 36;
+    let mut mult: u32 = 36;
     // println!("m {}", mask);
     // println!("v {}", value);
     for (m, v) in mask.chars().zip(value.chars()) {
@@ -46,33 +46,39 @@ fn apply_mask(mask: &str, value: &str) -> u64 {
 }
 
 fn to_int(value: &str) -> u64 {
-    value.chars().enumerate().map(|(i, x)| 2u64.pow(35 - i as u32)  as u64 * x.to_digit(10).unwrap() as u64).sum()
+    value
+        .chars()
+        .enumerate()
+        .map(|(i, x)| 2u64.pow(35 - i as u32) as u64 * x.to_digit(10).unwrap() as u64)
+        .sum()
 }
 
 fn replace_x(input: &str) -> Vec<String> {
     if !input.contains("X") {
-        return vec![input.to_string()]
+        return vec![input.to_string()];
     } else {
         let mut res = vec![];
         let s0 = input.replacen("X", "0", 1);
         let s1 = input.replacen("X", "1", 1);
         res.append(&mut replace_x(&s0));
         res.append(&mut replace_x(&s1));
-        return res
+        return res;
     }
 }
 
 fn apply_mask2(mask: &str, value: &str) -> Vec<u64> {
-    let s : String = value.chars().zip(mask.chars()).map(|(v, m)| match m {
-        '0' => v, 
-        '1' | 'X' => m, 
-        _ => unreachable!()
-    }).collect();
+    let s: String = value
+        .chars()
+        .zip(mask.chars())
+        .map(|(v, m)| match m {
+            '0' => v,
+            '1' | 'X' => m,
+            _ => unreachable!(),
+        })
+        .collect();
     let res = replace_x(&s);
     res.iter().map(|x| to_int(&x)).collect()
-
 }
-
 
 #[aoc(day14, part1)]
 fn part1(input: &[Instruction]) -> u64 {
@@ -91,7 +97,6 @@ fn part1(input: &[Instruction]) -> u64 {
 
 #[aoc(day14, part2)]
 fn part2(input: &[Instruction]) -> u64 {
-
     let mut mem = HashMap::new();
     let mut mask = "";
     for i in input {
@@ -107,7 +112,6 @@ fn part2(input: &[Instruction]) -> u64 {
     }
     mem.values().sum()
 }
-
 
 #[cfg(test)]
 pub mod tests {
