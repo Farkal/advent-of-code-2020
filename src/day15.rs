@@ -45,13 +45,13 @@ pub mod tests {
         let input = "0,3,6";
         assert_eq!(part1(&input_generator(input)), 436);
         let input = "1,3,2";
-        // assert_eq!(part1(&input_generator(input)), 1);
+        assert_eq!(part1(&input_generator(input)), 1);
         let input = "2,1,3";
-        // assert_eq!(part1(&input_generator(input)), 10);
+        assert_eq!(part1(&input_generator(input)), 10);
         let input = "1,2,3";
-        // assert_eq!(part1(&input_generator(input)), 27);
+        assert_eq!(part1(&input_generator(input)), 27);
         let input = "3,1,2";
-        // assert_eq!(part1(&input_generator(input)), 1836);
+        assert_eq!(part1(&input_generator(input)), 1836);
     }
 
     #[test]
